@@ -50,8 +50,7 @@ function animate() {
     requestAnimationFrame(animate)
     
     wave.draw()
-    ball.draw()
-
+   
     let y = wave.y + wave.amplitude * Math.sin(ball.x * wave.frequency) 
     ball.draw(ball.x, y, ball.radius)
 }
