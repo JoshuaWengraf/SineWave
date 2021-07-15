@@ -5,7 +5,7 @@ const gui = new dat.GUI()
 let canvas = document.getElementById("canvas");
 context = canvas.getContext('2d');
 
-const wave = {
+const Wave = {
     y: canvas.height / 2,
     amplitude: 10,
     frequency: 0.01,
@@ -16,7 +16,7 @@ const wave = {
         context.moveTo(0, canvas.height / 2)
 
         for (let x = 0; x < canvas.width; x++){
-            let y = wave.y + wave.amplitude * Math.sin(x * wave.frequency) 
+            let y = Wave.y + Wave.amplitude * Math.sin(x * Wave.frequency) 
             context.lineTo(x, y );
         }
         context.stroke()
@@ -24,9 +24,9 @@ const wave = {
 }
 
 
-const ball = {
+const Ball = {
     x: 0,
-    y:  wave.y + wave.amplitude * Math.sin(this.x * wave.frequency),
+    y:  Wave.y + Wave.amplitude * Math.sin(this.x * Wave.frequency),
     radius: 10,
 
     draw(x,y, radius){
@@ -39,19 +39,20 @@ const ball = {
 }
 
 
-gui.add(wave, 'y', 0, canvas.height)
-gui.add(wave, 'amplitude', -300, 300)
-gui.add(wave, 'frequency', 0,1)
+gui.add(Wave, 'y', 0, canvas.height)
+gui.add(Wave, 'amplitude', -300, 300)
+gui.add(Wave, 'frequency', 0,1)
 
-gui.add(ball, 'x', 0, canvas.width)
+gui.add(Ball, 'x', 0, canvas.width)
 
 
 function animate() {
     requestAnimationFrame(animate)
     
-    wave.draw()
+    Wave.draw()
    
-    let y = wave.y + wave.amplitude * Math.sin(ball.x * wave.frequency) 
-    ball.draw(ball.x, y, ball.radius)
+    let y = Wave.y + Wave.amplitude * Math.sin(Ball.x * Wave.frequency) 
+    Ball.draw(Ball.x, y, Ball.radius)
 }
+
 animate()
